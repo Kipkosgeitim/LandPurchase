@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Land Purchase</string>
+
+    /**slogan**/
+    <string name="slogan">Everyone Deserves The Opportunity Of Home</string>
+
+
+    /**facebook login**/
+    <string name="facebook_app_id">2542816435737031</string>
+    <string name="facebook_login_protocol_name_fb">fb2542816435737031</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">b91ba1f05e14715a60edd295d325a862</string>
+    <string name="title_activity_tracking_order">Map</string>
+
+    /**strings**/
+    <string name="landNumber">Land 01</string>
+    <string name="landName">Land Name</string>
+    <string name="landPrice">1,000</string>
+    <string name="dest">Description</string>
+    <string name="showComment">Show Comment</string>
+    <string name="nameOfLandLocation">Name of Land</string>
+
+    <string name="action_settings">Settings</string>
+
+
 </resources>

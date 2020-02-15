@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "273069895480",
+    "firebase_url": "https://land-purchase-64e5c.firebaseio.com",
+    "project_id": "land-purchase-64e5c",
+    "storage_bucket": "land-purchase-64e5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273069895480:android:a706740dd3dff331231bcd",
+        "android_client_info": {
+          "package_name": "com.example.landpurchase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273069895480-b3nv47nsvorl3fqcen2en4mbgitgg7pu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.landpurchase",
+            "certificate_hash": "db648ef0091d36d8353fb1955c47f813639ce921"
+          }
+        },
+        {
+          "client_id": "273069895480-t26942nte1h203b1gdm7i9jke4ostb2l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC9r8S7kDJfh2uE7NKbczgNMi5sottsFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273069895480-t26942nte1h203b1gdm7i9jke4ostb2l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
