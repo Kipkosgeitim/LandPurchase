@@ -19,7 +19,7 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         View.OnCreateContextMenuListener {
 
     public TextView txt_cart_name,txt_price;
-    public ElegantNumberButton btn_quantity;
+    public ElegantNumberButton btn_SizeOfLand;
     public ImageView cart_image;
 
     public RelativeLayout view_background;
@@ -34,7 +34,7 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         super(itemView);
         txt_cart_name = (TextView)itemView.findViewById(R.id.cart_item_name);
         txt_price = (TextView)itemView.findViewById(R.id.cart_item_price);
-        btn_quantity = (ElegantNumberButton) itemView.findViewById(R.id.btn_quantity);
+        btn_SizeOfLand = (ElegantNumberButton) itemView.findViewById(R.id.btn_sizeOfLand);
         cart_image = (ImageView) itemView.findViewById(R.id.cart_image);
         view_background =(RelativeLayout)itemView.findViewById(R.id.view_background);
         view_forebackground = (LinearLayout)itemView.findViewById(R.id.view_foreground);

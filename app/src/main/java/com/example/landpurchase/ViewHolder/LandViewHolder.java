@@ -11,30 +11,33 @@ import com.example.landpurchase.Interface.ItemClickListener;
 import com.example.landpurchase.R;
 
 public class LandViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    public TextView txtLandId,txtLandPhone,txtLandStatus,txtLandAddress;
-
+    public TextView land_name,land_price;
+    public ImageView land_image,fav_image,share_image,quick_cart;
     private ItemClickListener itemClickListener;
-    public ImageView btn_delete;
 
     public LandViewHolder(@NonNull View itemView) {
         super(itemView);
-
-        txtLandId = (TextView)itemView.findViewById(R.id.land_id);
-        txtLandPhone=(TextView)itemView.findViewById(R.id.land_phone);
-        txtLandStatus=(TextView)itemView.findViewById(R.id.land_status);
-        txtLandAddress=(TextView)itemView.findViewById(R.id.land_address);
-        btn_delete = (ImageView)itemView.findViewById(R.id.btn_delete);
-
-        itemView.setOnClickListener(this);
     }
+
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
+
+        land_name = (TextView)itemView.findViewById(R.id.land_name);
+        land_image = (ImageView)itemView.findViewById(R.id.land_image);
+        fav_image = (ImageView)itemView.findViewById(R.id.fav);
+        share_image = (ImageView)itemView.findViewById(R.id.btnShare);
+        land_price = (TextView)itemView.findViewById(R.id.land_price);
+        quick_cart = (ImageView)itemView.findViewById(R.id.btn_quick_cart);
+
+        itemView.setOnClickListener(this);
+
+
     }
 
     @Override
     public void onClick(View v) {
-        this.itemClickListener.onClick(v,getAdapterPosition(),false);
+        itemClickListener.onClick(v, getAdapterPosition(),false);
 
     }
 }

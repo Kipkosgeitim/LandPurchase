@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.landpurchase.Common.Common;
 import com.example.landpurchase.Interface.ItemClickListener;
 import com.example.landpurchase.Models.Requests;
-import com.example.landpurchase.ViewHolder.LandViewHolder;
+import com.example.landpurchase.ViewHolder.LandOrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,7 +28,7 @@ public class LandStatus extends AppCompatActivity {
 
     public RecyclerView recyclerView;
     public RecyclerView.LayoutManager layoutManager;
-    FirebaseRecyclerAdapter<Requests, LandViewHolder> adapter;
+    FirebaseRecyclerAdapter<Requests, LandOrderViewHolder> adapter;
 
     FirebaseDatabase database;
     DatabaseReference requests;
@@ -70,9 +70,9 @@ public class LandStatus extends AppCompatActivity {
                 .setQuery(getOrderByUser,Requests.class)
                 .build();
 
-        adapter = new FirebaseRecyclerAdapter<Requests, LandViewHolder>(orderOptions) {
+        adapter = new FirebaseRecyclerAdapter<Requests, LandOrderViewHolder>(orderOptions) {
             @Override
-            protected void onBindViewHolder(@NonNull LandViewHolder viewHolder, final int position, @NonNull Requests model) {
+            protected void onBindViewHolder(@NonNull LandOrderViewHolder viewHolder, final int position, @NonNull Requests model) {
 
                 viewHolder.txtLandId.setText(adapter.getRef(position).getKey());
                 viewHolder.txtLandStatus.setText(Common.convertCodeToStatus(model.getStatus()));
@@ -102,10 +102,10 @@ public class LandStatus extends AppCompatActivity {
 
             @NonNull
             @Override
-            public LandViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            public LandOrderViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                 View itemView = LayoutInflater.from(viewGroup.getContext())
                         .inflate(R.layout.land_layout,viewGroup,false);
-                return new LandViewHolder(itemView);
+                return new LandOrderViewHolder(itemView);
             }
         };
         adapter.startListening();

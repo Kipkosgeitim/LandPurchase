@@ -12,14 +12,14 @@ public class Requests {
     private String paymentMethod;
     private String paymentState;
     private String latLng;
-    private String restaurantId;
+    private String countyId;
     private List<LandOrder> lands; //List of land order
 
 
     public Requests() {
     }
 
-    public Requests(String phone, String name, String address, String total, String status, String comment, String paymentMethod, String paymentState, String latLng, String restaurantId, List<LandOrder> lands) {
+    public Requests(String phone, String name, String address, String total, String status, String comment, String paymentMethod, String paymentState, String latLng, String countyId, List<LandOrder> lands) {
         this.phone = phone;
         this.name = name;
         this.address = address;
@@ -29,7 +29,7 @@ public class Requests {
         this.paymentMethod = paymentMethod;
         this.paymentState = paymentState;
         this.latLng = latLng;
-        this.restaurantId = restaurantId;
+        this.countyId = countyId;
         this.lands = lands;
     }
 
@@ -105,12 +105,12 @@ public class Requests {
         this.latLng = latLng;
     }
 
-    public String getRestaurantId() {
-        return restaurantId;
+    public String getCountyId() {
+        return countyId;
     }
 
-    public void setRestaurantId(String restaurantId) {
-        this.restaurantId = restaurantId;
+    public void setCountyId(String countyId) {
+        this.countyId = countyId;
     }
 
     public List<LandOrder> getLands() {

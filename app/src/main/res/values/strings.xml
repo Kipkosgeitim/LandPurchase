@@ -18,8 +18,34 @@
     <string name="dest">Description</string>
     <string name="showComment">Show Comment</string>
     <string name="nameOfLandLocation">Name of Land</string>
+    <string name="landLocation">Land Location</string>
+    <string name="landAddress">Land Address</string>
+    <string name="homeAddress">Home Address</string>
+    <string name="paymentMethod">Payment Method</string>
+    <string name="cash">Cash</string>
+    <string name="mpesa">M-Pesa</string>
+    <string name="bank">Bank</string>
+    <string name="comment">Comment</string>
+    <string name="name">Kevin</string>
+    <string name="placeLandOrder">Place Land Order</string>
+    <string name="news">Subscribe News</string>
+    <string name="userPhone">User Phone</string>
 
     <string name="action_settings">Settings</string>
+    <string name="countyName">name of County</string>
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
 
 
 </resources>

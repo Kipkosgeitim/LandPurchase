@@ -22,7 +22,7 @@ public class Common {
 
     public static String topicName = "News";
 
-    public static final String INTENT_Land_ID = "LandId";
+    public static final String INTENT_LAND_ID = "LandId";
     public static String countySelected ="";
 
     public static String PHONE_TEXT = "userPhone";

@@ -82,7 +82,7 @@
         <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:id="@+id/btn_quantity"
+            android:id="@+id/btn_sizeOfLand"
             android:layout_margin="10dp"
             app:textSize="8sp"
             app:backGroundColor="@color/colorAccent"

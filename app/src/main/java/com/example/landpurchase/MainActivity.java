@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void printKeyHash() {
         try{
-            PackageInfo info = getPackageManager().getPackageInfo("com.example.appfood",
+            PackageInfo info = getPackageManager().getPackageInfo("com.example.landpurchase",
                     PackageManager.GET_SIGNATURES);
 
             for (Signature signature:info.signatures)

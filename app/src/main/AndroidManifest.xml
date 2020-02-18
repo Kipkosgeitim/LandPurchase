@@ -14,11 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ShowComment"></activity>
+        <activity android:name=".Cart" />
+        <activity android:name=".searchActivity" />
+        <activity
+            android:name=".Home"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FavoritesActivity" />
+        <activity android:name=".LandList" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AAIzaSyB8o7Jlh_vQ9FH5Wot08F3OfpvZ9We_W4s" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -30,23 +38,17 @@
             android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />
 
         <activity android:name="com.facebook.accountkit.ui.AccountKitActivity" />
-        <activity android:name=".LandDetails"></activity>
+        <activity android:name=".LandDetails" />
         <activity android:name=".TrackingLand" />
         <activity android:name=".CountiesList" />
         <activity android:name=".LandStatus" />
         <activity android:name=".MainActivity">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- FirebaseInstanceIdService performs security checks at runtime, no need for explicit permissions despite exported="true" -->
-
-
+        </activity> <!-- FirebaseInstanceIdService performs security checks at runtime, no need for explicit permissions despite exported="true" -->
         <service android:name=".Service.MyFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -57,8 +59,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-
 
         <provider
             android:name="com.facebook.FacebookContentProvider"

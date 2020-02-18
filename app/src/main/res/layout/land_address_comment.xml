@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:cardElevation="4dp">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+
+
+        <fragment
+            android:id="@+id/place_autocomplete_fragment"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtComment"
+            android:hint="@string/comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:textSize="34sp"
+            android:inputType="textMultiLine"
+            app:met_baseColor="@color/colorPrimary"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_singleLineEllipsis="true"/>
+
+
+        <TextView
+            android:text="@string/landLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/rdiLandAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/landAddress"
+                />
+
+            <RadioButton
+                android:id="@+id/rdiHomeToAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/homeAddress"
+                />
+        </RadioGroup>
+
+        <TextView
+            android:text="@string/paymentMethod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/rdiCash"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cash"
+                />
+
+            <RadioButton
+                android:id="@+id/rdiMpesa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mpesa"
+                />
+
+            <RadioButton
+                android:id="@+id/rdiBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bank"
+                />
+        </RadioGroup>
+
+
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>
