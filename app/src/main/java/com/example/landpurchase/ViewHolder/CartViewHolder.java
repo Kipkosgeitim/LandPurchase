@@ -22,7 +22,7 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public ElegantNumberButton btn_SizeOfLand;
     public ImageView cart_image;
 
-    public RelativeLayout view_background;
+    private RelativeLayout view_background;
     public LinearLayout view_forebackground;
 
     private ItemClickListener itemClickListener;
@@ -32,12 +32,12 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
     public CartViewHolder(@NonNull View itemView) {
         super(itemView);
-        txt_cart_name = (TextView)itemView.findViewById(R.id.cart_item_name);
-        txt_price = (TextView)itemView.findViewById(R.id.cart_item_price);
-        btn_SizeOfLand = (ElegantNumberButton) itemView.findViewById(R.id.btn_sizeOfLand);
-        cart_image = (ImageView) itemView.findViewById(R.id.cart_image);
-        view_background =(RelativeLayout)itemView.findViewById(R.id.view_background);
-        view_forebackground = (LinearLayout)itemView.findViewById(R.id.view_foreground);
+        txt_cart_name = itemView.findViewById(R.id.cart_item_name);
+        txt_price = itemView.findViewById(R.id.cart_item_price);
+        btn_SizeOfLand = itemView.findViewById(R.id.btn_sizeOfLand);
+        cart_image = itemView.findViewById(R.id.cart_image);
+        view_background = itemView.findViewById(R.id.view_background);
+        view_forebackground = itemView.findViewById(R.id.view_foreground);
 
         itemView.setOnCreateContextMenuListener(this);
 

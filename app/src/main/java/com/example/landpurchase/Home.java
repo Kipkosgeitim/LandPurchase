@@ -92,14 +92,14 @@ public class Home extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
 
 
 
         /**View**/
-        swipeRefreshLayout =(SwipeRefreshLayout)findViewById(R.id.swipe_layout);
+        swipeRefreshLayout = findViewById(R.id.swipe_layout);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
                 android.R.color.holo_orange_dark,
@@ -141,7 +141,7 @@ public class Home extends AppCompatActivity
 
 
         Paper.init(this);
-        fab =(CounterFab) findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,26 +152,26 @@ public class Home extends AppCompatActivity
 
         fab.setCount(new Database(this).getCountCart(Common.currentUser.getPhone()));
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
         /**Set name for user**/
 
         View headerView =navigationView.getHeaderView(0);
-        txtFullName=(TextView)headerView.findViewById(R.id.txtFullName);
+        txtFullName= headerView.findViewById(R.id.txtFullName);
         txtFullName.setText(Common.currentUser.getName());
 
         /**load menu**/
 
 
-        recycler_menu =(RecyclerView)  findViewById(R.id.recycler_menu);
+        recycler_menu = findViewById(R.id.recycler_menu);
         layoutManager = new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(recycler_menu.getContext(),
@@ -190,7 +190,7 @@ public class Home extends AppCompatActivity
     }
 
     private void setupSlider() {
-        mSlider = (SliderLayout)findViewById(R.id.slider);
+        mSlider = findViewById(R.id.slider);
         image_list = new HashMap<>();
 
         final DatabaseReference banners = database.getReference("Counties").child(Common.countySelected)
@@ -209,13 +209,13 @@ public class Home extends AppCompatActivity
                 for (String key:image_list.keySet())
                 {
                     String[] keySplit = key.split("@@@");
-                    String nameOfFood = keySplit[0];
-                    String idOfFood = keySplit[1];
+                    String nameOfLand = keySplit[0];
+                    String idOfLand = keySplit[1];
 
                     /**Create Slider**/
                     final TextSliderView textSliderView = new TextSliderView(getBaseContext());
                     textSliderView
-                            .description(nameOfFood)
+                            .description(nameOfLand)
                             .image(image_list.get(key))
                             .setScaleType(BaseSliderView.ScaleType.Fit)
                             .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
@@ -230,7 +230,7 @@ public class Home extends AppCompatActivity
                             });
                     /**add extra bundle**/
                     textSliderView.bundle(new Bundle());
-                    textSliderView.getBundle().putString("FoodId",idOfFood);
+                    textSliderView.getBundle().putString("LandId",idOfLand);
 
                     mSlider.addSlider(textSliderView);
 
@@ -323,7 +323,7 @@ public class Home extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -394,7 +394,7 @@ public class Home extends AppCompatActivity
         }
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -409,7 +409,7 @@ public class Home extends AppCompatActivity
         View layout_setting = inflater.inflate(R.layout.setting_layout,null);
 
 
-        final CheckBox ckb_subscribe_new  = (CheckBox)layout_setting.findViewById(R.id.ckb_sub_new);
+        final CheckBox ckb_subscribe_new  = layout_setting.findViewById(R.id.ckb_sub_new);
 
         /**Add code remember state of check**/
 
@@ -455,7 +455,7 @@ public class Home extends AppCompatActivity
         LayoutInflater inflater = LayoutInflater.from(this);
         View layout_home = inflater.inflate(R.layout.home_address_layout,null);
 
-        final MaterialEditText edtHomeAddress = (MaterialEditText)layout_home.findViewById(R.id.edtHomeAddress);
+        final MaterialEditText edtHomeAddress = layout_home.findViewById(R.id.edtHomeAddress);
 
         alertDialog.setView(layout_home);
 
@@ -491,7 +491,7 @@ public class Home extends AppCompatActivity
         LayoutInflater inflater = LayoutInflater.from(this);
         View layout_name = inflater.inflate(R.layout.update_name_layout,null);
 
-        final MaterialEditText edtName = (MaterialEditText)layout_name.findViewById(R.id.edtName);
+        final MaterialEditText edtName = layout_name.findViewById(R.id.edtName);
 
         alertDialog.setView(layout_name);
 

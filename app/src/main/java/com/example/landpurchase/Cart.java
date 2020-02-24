@@ -100,7 +100,7 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
     //Location
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
-    public Location mLastLocation;
+    private Location mLastLocation;
 
     private static final int UPDATE_INTERVAL =5000;
     private static final int FASTEST_INTERVAL = 3000;
@@ -113,8 +113,8 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
     private static final int LOCATION_REQUEST_CODE=9999;
 
     //Declare google maps retrofit
-    IGoogleService mGoogleMapService;
-    APIService mService;
+    private IGoogleService mGoogleMapService;
+    private APIService mService;
 
     RelativeLayout rootLayout;
 
@@ -142,7 +142,7 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
      */
 
     static PayPalConfiguration config = new PayPalConfiguration()
-            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)  /**use Sandbox because we test, change later if you  going to production**/
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
     String address,comment;
 
@@ -156,8 +156,7 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                 if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 {
 
-                    if (checkPlayServices())/**if you have play service on your device**/
-                    {
+                    if (checkPlayServices()) {
                         buildGoogleApiClient();
                         createLocationRequest();
                     }
@@ -171,14 +170,10 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        /**
-         * init
-         */
         mGoogleMapService = Common.getGoogleMapAPI();
 
         rootLayout = findViewById(R.id.rootLayout);
 
-        /**Runtime permission**/
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
@@ -189,41 +184,25 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                     },LOCATION_REQUEST_CODE);
         }
         else {
-            if (checkPlayServices())/**if you have play service on your device**/
-            {
+            if (checkPlayServices()) {
                 buildGoogleApiClient();
                 createLocationRequest();
             }
         }
-        /**
-         * init paypal
-         */
         Intent intent = new Intent(this, PayPalService.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
         startService(intent);
 
-        /**
-         * init Service
-         */
         mService = Common.getFCMService();
 
         database = FirebaseDatabase.getInstance();
         requests=database.getReference("Counties").child(Common.countySelected).child("Requests");
 
-        /**
-         *
-         * Init
-         */
         recyclerView = findViewById(R.id.listCart);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        /**
-         *
-         * swipe to delete
-         *
-         */
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
@@ -292,27 +271,14 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
 
         final PlaceAutocompleteFragment edtAddress = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
-        /**
-         * Hide search icon before fragment
-         */
         edtAddress.getView().findViewById(R.id.place_autocomplete_search_button).setVisibility(View.GONE);
 
-        /**
-         * set hint for autocomplete Edit Text
-         */
         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
                 .setHint("Enter your address");
-
-        /**
-         * set text size
-         */
 
         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
                 .setTextSize(14);
 
-        /**
-         * Get address from place autocomplete
-         */
         edtAddress.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
@@ -329,10 +295,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
 
         final MaterialEditText edtComment = land_address_comment.findViewById(R.id.edtComment);
 
-        /**
-         * Radio
-         */
-
         final RadioButton rdilandAddress = land_address_comment.findViewById(R.id.rdiLandAddress);
         final RadioButton rdiHomeAddress = land_address_comment.findViewById(R.id.rdiHomeToAddress);
         final RadioButton rdiCash = land_address_comment.findViewById(R.id.rdiCash);
@@ -340,15 +302,10 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
         bank = land_address_comment.findViewById(R.id.rdiBank);
 
 
-        /**
-         * Event Radio
-         */
-
         rdilandAddress.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                /**ship to this address features**/
-                if (isChecked) /**isChecked ==true**/ {
+                if (isChecked) {
                     //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyD5mZeMXkEu2wdzX0flkgNvjexM4kVjHpM
                     //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyAS9AngOfVIDetLNyXSLHQyltw1HzROePY
 
@@ -362,10 +319,9 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                             .enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
-                                    /**if fetch API ok**/
                                     try {
 
-                                        JSONObject jsonObject = new JSONObject(response.body().toString());
+                                        JSONObject jsonObject = new JSONObject(response.body());
 
                                         JSONArray resultsArray = jsonObject.getJSONArray("results");
 
@@ -373,7 +329,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
 
                                         address = firstObject.getString("formatted_address");
 
-                                        /**set this address to edtText**/
                                         ((EditText) edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
                                                 .setText(address);
 
@@ -421,25 +376,13 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                /**Show Paypal to payment
-
-                 add checked condition here
-                 if user select address from place fragment , just use it
-                 if user select ship to this address , get address from location and use it
-                 if user select home address get homeAddress from profile and use it**/
-
                 if (!rdilandAddress.isChecked() && !rdiHomeAddress.isChecked() && !bank.isChecked()){
-                    /**If both radio is not selected ->**/
                     if (landAddress !=null)
                         address = landAddress.getAddress().toString();
                     else
                     {
                         Toast.makeText(Cart.this, "Please enter address or select option address", Toast.LENGTH_SHORT).show();
 
-                        /**fix crush fragment**/
-                        /**Remove fragment**/
-
-                        /**check this one to fix autocomplete**/
                         getFragmentManager().beginTransaction()
                                 .remove(getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment))
                                 .commit();
@@ -452,8 +395,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                 {
                     Toast.makeText(Cart.this, "Please enter address or select option address", Toast.LENGTH_SHORT).show();
 
-                    /**fix crush fragment**/
-                    /**Remove fragment**/
                     getFragmentManager().beginTransaction()
                             .remove(getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment))
                             .commit();
@@ -462,14 +403,9 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                 }
                 comment = edtComment.getText().toString();
 
-                /**check payment**/
-
-                if (!rdiCash.isChecked() && !rdiMpesa.isChecked() && !bank.isChecked())/**if both Cash and Mpesa and Bank are not checked**/
-                {
+                if (!rdiCash.isChecked() && !rdiMpesa.isChecked() && !bank.isChecked()) {
                     Toast.makeText(Cart.this, "Please select Payment option", Toast.LENGTH_SHORT).show();
 
-                    /**fix crush fragment**/
-                    /**Remove fragment**/
                     getFragmentManager().beginTransaction()
                             .remove(getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment))
                             .commit();
@@ -493,7 +429,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                     startActivityForResult(intent, PAYPAL_REQUEST_CODE);
                 }
                 else if (rdiCash.isChecked()){
-                    /**Create new Request**/
                     if (mLastLocation !=null) {
                         Requests request = new Requests(
                                 Common.currentUser.getPhone(),
@@ -508,16 +443,12 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                                 Common.countySelected,
                                 cart
                         );
-                        /**Submit to firebase**/
-                        /**we will use system.currentMilli to key**/
                         String order_number = String.valueOf(System.currentTimeMillis());
                         requests.child(order_number)
                                 .setValue(request);
-                        /**delete cart**/
                         new Database(getBaseContext()).cleanCart(Common.currentUser.getPhone());
 
                         sendNotificationOrder(order_number);
-                        /**delete cart**/
                         new Database(getBaseContext()).cleanCart(Common.currentUser.getPhone());
 
                         Toast.makeText(Cart.this, "Thank you, Land Order Placed", Toast.LENGTH_SHORT).show();
@@ -536,7 +467,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                     }
 
                     if (Double.parseDouble(Common.currentUser.getBalance().toString())>=amount){
-                        /**Create new Request**/
                         Requests request = new Requests(
                                 Common.currentUser.getPhone(),
                                 Common.currentUser.getName(),
@@ -550,16 +480,11 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                                 Common.countySelected,
                                 cart
                         );
-                        /**Submit to firebase**/
-                        /**we will use system.currentMilli to key**/
                         final String land_order_number = String.valueOf(System.currentTimeMillis());
                         requests.child(land_order_number)
                                 .setValue(request);
 
 
-
-
-                        /**update balance**/
                         double balance = Double.parseDouble(Common.currentUser.getBalance().toString()) -amount;
                         Map<String,Object> update_balance = new HashMap<>();
                         update_balance.put("balance",balance);
@@ -581,7 +506,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                                                         @Override
                                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                             Common.currentUser = dataSnapshot.getValue(User.class);
-                                                            /**send order to server**/
                                                             sendNotificationOrder(land_order_number);
                                                         }
 
@@ -610,7 +534,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                 }
 
 
-                /**Remove fragment**/
                 getFragmentManager().beginTransaction()
                         .remove(getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment))
                         .commit();
@@ -622,7 +545,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
             public void onClick(DialogInterface dialogInterface, int which) {
                 dialogInterface.dismiss();
 
-                /**Remove fragment**/
                 getFragmentManager().beginTransaction()
                         .remove(getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment))
                         .commit();
@@ -642,7 +564,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                         String paymentDetail = confirmation.toJSONObject().toString(4);
                         JSONObject jsonObject = new JSONObject(paymentDetail);
 
-                        /**Create new Request**/
                         Requests request = new Requests(
                                 Common.currentUser.getPhone(),
                                 Common.currentUser.getName(),
@@ -656,12 +577,9 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                                 Common.countySelected,
                                 cart
                         );
-                        /**Submit to firebase**/
-                        /**we will use system.currentMilli to key**/
                         String land_order_number = String.valueOf(System.currentTimeMillis());
                         requests.child(land_order_number)
                                 .setValue(request);
-                        /**delete cart**/
                         new Database(getBaseContext()).cleanCart(Common.currentUser.getPhone());
 
                         sendNotificationOrder(land_order_number);
@@ -692,11 +610,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                 for (DataSnapshot postSnapShot:dataSnapshot.getChildren()){
 
                     Token serverToken = postSnapShot.getValue(Token.class);
-
-                    /**
-                     create raw payload to send
-                     Notification2 notification = new Notification2("EDMT Dev","You have new order "+order_number);
-                     Sender content =new Sender(serverToken.getToken(),notification);**/
 
                     Map<String,String> dataSend = new HashMap<>();
                     dataSend.put("title","Land Purchase");
@@ -746,7 +659,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
 
-        /**calculate total price**/
         int total =0;
         for (LandOrder order:cart)
             total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getSizeOfLand()));
@@ -763,15 +675,11 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
     }
 
     private void deleteCart(int position) {
-        /**We will remove item at List<Order> by position**/
         cart.remove(position);
-        /**After that we will delete all old data from SQlite**/
         new Database(this).cleanCart(Common.currentUser.getPhone());
-        /**then update new data from List <Order> to SQlite**/
         for (LandOrder item:cart)
             new Database(this).addToCart(item);
 
-        /**Refresh**/
         loadListLand();
     }
 
@@ -789,8 +697,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
             new Database(getBaseContext()).removeFromCart(deleteItem.getLandOrderId(),Common.currentUser.getPhone());
 
 
-            /**update txtTotal**/
-            /**calculate total price**/
             int total =0;
             List<LandOrder> orders = new Database(getBaseContext()).getCarts(Common.currentUser.getPhone());
             for (LandOrder item:orders)
@@ -799,7 +705,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
             NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
             txtTotalPrice.setText(fmt.format(total));
 
-            /**Make Snackbar**/
             Snackbar snackbar = Snackbar.make(rootLayout,name + " removed from cart!",Snackbar.LENGTH_LONG);
             snackbar.setAction("UNDO", new View.OnClickListener() {
                 @Override
@@ -807,8 +712,6 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                     adapter.restoreItem(deleteItem,deleteIndex);
                     new Database(getBaseContext()).addToCart(deleteItem);
 
-                    /**update txtTotal**/
-                    /**calculate total price**/
                     int total =0;
                     List<LandOrder> orders = new Database(getBaseContext()).getCarts(Common.currentUser.getPhone());
                     for (LandOrder item:orders)

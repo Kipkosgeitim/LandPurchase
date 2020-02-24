@@ -116,7 +116,7 @@ public class searchActivity extends AppCompatActivity {
         localDB =new Database(this);
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_search);
+        recyclerView = findViewById(R.id.recycler_search);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
 
@@ -125,7 +125,7 @@ public class searchActivity extends AppCompatActivity {
 
 
         /** search**/
-        materialSearchBar = (MaterialSearchBar) findViewById(R.id.searchBar);
+        materialSearchBar = findViewById(R.id.searchBar);
         materialSearchBar.setHint("Enter Constituency");
         /**materialSearchBar.setSpeechMode(false);no need because we had defined in xml**/
         loadSuggest();/**write function to load suggest from firebase**/
@@ -263,7 +263,7 @@ public class searchActivity extends AppCompatActivity {
                         favorites.setLandDescription(model.getLandDescription());
                         favorites.setSizeOfLand(model.getSizeOfLand());
                         favorites.setLandImage(model.getLandImage());
-                        favorites.setLandTitleDeed(model.getLandId());
+                        favorites.setLandTitleDeed(model.getLandMenuId());
                         favorites.setUserPhone(Common.currentUser.getPhone());
                         favorites.setLandPrice(model.getLandPrice());
 
@@ -307,7 +307,7 @@ public class searchActivity extends AppCompatActivity {
                 return new LandViewHolder(itemView);
             }
         };
-        recyclerView = (RecyclerView)findViewById(R.id.recycler_search);
+        recyclerView = findViewById(R.id.recycler_search);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(recyclerView.getContext(),

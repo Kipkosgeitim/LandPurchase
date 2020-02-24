@@ -45,6 +45,7 @@ import com.squareup.picasso.Target;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class LandList extends AppCompatActivity {
 
     RecyclerView recyclerView;
@@ -150,10 +151,13 @@ public class LandList extends AppCompatActivity {
                 /**get intent here**/
                 if (getIntent() != null)
                     categoryId = getIntent().getStringExtra("CategoryId");
+
                 if (!categoryId.isEmpty() && categoryId != null) {
 
-                    if (Common.isConnectedToInternet(getBaseContext()))
+                    if (Common.isConnectedToInternet(getBaseContext())){
                         loadListLand(categoryId);
+                    }
+
                     else{
                         Toast.makeText(LandList.this, "", Toast.LENGTH_SHORT).show();
                     }
@@ -239,10 +243,10 @@ public class LandList extends AppCompatActivity {
         /**
          * create options with query
          */
-        FirebaseRecyclerOptions<Land> foodOptions = new FirebaseRecyclerOptions.Builder<Land>()
+        FirebaseRecyclerOptions<Land>landOptions = new FirebaseRecyclerOptions.Builder<Land>()
                 .setQuery(searchByName,Land.class)
                 .build();
-        searchAdapter = new FirebaseRecyclerAdapter<Land, LandViewHolder>(foodOptions){
+        searchAdapter = new FirebaseRecyclerAdapter<Land, LandViewHolder>(landOptions){
             @Override
             protected void onBindViewHolder(@NonNull LandViewHolder viewHolder, int i, @NonNull Land model) {
 
@@ -276,15 +280,17 @@ public class LandList extends AppCompatActivity {
     }
 
     private void loadSuggest() {
-        landList.orderByChild("landId").equalTo(categoryId)
+        landList.orderByChild("landMenuId").equalTo(categoryId)
                 .addValueEventListener(new ValueEventListener(){
                     @Override
+
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot postSnapshot:dataSnapshot.getChildren()
                         )
+
                         {
                             Land  item = postSnapshot.getValue(Land.class);
-                            suggestList.add(item.getName());/**Add name of food to suggest list**/
+                            suggestList.add(item.getName());/**Add name of land to suggest list**/
 
                         }
                         materialSearchBar.setLastSuggestions(suggestList);
@@ -297,10 +303,10 @@ public class LandList extends AppCompatActivity {
                 });
     }
 
-    /**check here to refresh food**/
+    /**check here to refresh land**/
     private void loadListLand(String categoryId) {
 
-        Query searchByName = landList.orderByChild("landId").equalTo(categoryId);
+        Query searchByName = landList.orderByChild("landMenuId").equalTo(categoryId);
 
         /**create options with query**/
 
@@ -333,8 +339,8 @@ public class LandList extends AppCompatActivity {
                                     model.getName(),
                                     "1",
                                     model.getLandPrice(),
-                                    model.getLandImage(),
-                                    model.getSizeOfLand()
+                                    model.getSizeOfLand(),
+                                    model.getLandImage()
                             ));
                         }
 
@@ -398,9 +404,9 @@ public class LandList extends AppCompatActivity {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         //start new activity
-                        Intent landDetails = new Intent(LandList.this, LandDetails.class);
-                        landDetails.putExtra("LandId", adapter.getRef(position).getKey());
-                        startActivity(landDetails);
+                        Intent foodDetail = new Intent(LandList.this, LandDetails.class);
+                        foodDetail.putExtra("LandId", adapter.getRef(position).getKey());
+                        startActivity(foodDetail);
 
 
                     }

@@ -25,6 +25,7 @@ public class Database extends SQLiteAssetHelper {
         Cursor cursor = null;
         String SQLQuery = String.format("SELECT * from LandDetail WHERE UserPhone='%s' AND LandOrderId='%s'",userPhone,landId);
         cursor = db.rawQuery(SQLQuery,null);
+        //noinspection RedundantIfStatement
         if (cursor.getCount()>0)
             flag = true;
         else

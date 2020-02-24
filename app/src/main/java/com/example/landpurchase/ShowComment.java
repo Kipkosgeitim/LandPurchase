@@ -51,7 +51,7 @@ public class ShowComment extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         ratingTbl = database.getReference("Rating");
 
-        recyclerView = (RecyclerView)findViewById(R.id.recycleComment);
+        recyclerView = findViewById(R.id.recycleComment);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -60,7 +60,7 @@ public class ShowComment extends AppCompatActivity {
          *
          */
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_layout);
+        mSwipeRefreshLayout = findViewById(R.id.swipe_layout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override

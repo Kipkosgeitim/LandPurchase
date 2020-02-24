@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class DirectionJSONParser {
 
     /**
@@ -55,7 +56,7 @@ public class DirectionJSONParser {
 
         } catch (JSONException e) {
             e.printStackTrace();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
         return routes;

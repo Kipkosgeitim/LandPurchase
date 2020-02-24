@@ -36,6 +36,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
+
 public class LandDetails extends AppCompatActivity implements RatingDialogListener {
 
     TextView land_name,land_price,land_description;
@@ -63,7 +64,7 @@ public class LandDetails extends AppCompatActivity implements RatingDialogListen
 
         setContentView(R.layout.activity_land_details);
 
-        btnShowComment = (Button)findViewById(R.id.btnShowComment);
+        btnShowComment = findViewById(R.id.btnShowComment);
         btnShowComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,10 +82,10 @@ public class LandDetails extends AppCompatActivity implements RatingDialogListen
 
 
         /**init view**/
-        numberButton = (ElegantNumberButton)findViewById(R.id.number_button);
-        btnCart=(CounterFab) findViewById(R.id.btnCart);
-        btnRating=(FloatingActionButton)findViewById(R.id.btn_rating);
-        ratingBar=(RatingBar)findViewById(R.id.ratingBar);
+        numberButton = findViewById(R.id.number_button);
+        btnCart= findViewById(R.id.btnCart);
+        btnRating= findViewById(R.id.btn_rating);
+        ratingBar= findViewById(R.id.ratingBar);
 
         btnRating.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,27 +113,28 @@ public class LandDetails extends AppCompatActivity implements RatingDialogListen
         btnCart.setCount(new Database(this).getCountCart(Common.currentUser.getPhone()));
 
 
-        land_description = (TextView)findViewById(R.id.land_description);
-        land_name = (TextView)findViewById(R.id.land_name);
-        land_price = (TextView)findViewById(R.id.land_price);
-        land_image = (ImageView)findViewById(R.id.img_land);
+        land_description = findViewById(R.id.land_description);
+        land_name = findViewById(R.id.land_name);
+        land_price = findViewById(R.id.land_price);
+        land_image = findViewById(R.id.img_land);
 
-        collapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.collapsing);
+        collapsingToolbarLayout = findViewById(R.id.collapsing);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppbar);
 
         /**Get Land id from intent**/
         if(getIntent() !=null)
             landId =getIntent().getStringExtra("LandId");
-        if (landId != null && !landId.isEmpty()) {
-            if (Common.isConnectedToInternet(getBaseContext())) {
-                getDetailLand(landId);
-                getRatingLand(landId);
+            if (!landId.isEmpty()) {
+                if (Common.isConnectedToInternet(getBaseContext())) {
+                    getDetailLand(landId);
+                    getRatingLand(landId);
 
-            } else {
-                Toast.makeText(LandDetails.this, "Please check your connection!!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LandDetails.this, "Please check your connection!!", Toast.LENGTH_SHORT).show();
+                }
             }
-        }
+
 
     }
 

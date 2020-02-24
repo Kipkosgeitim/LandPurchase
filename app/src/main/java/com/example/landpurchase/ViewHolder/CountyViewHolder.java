@@ -20,8 +20,8 @@ public class CountyViewHolder extends RecyclerView.ViewHolder implements View.On
     public CountyViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        txt_county_name = (TextView)itemView.findViewById(R.id.county_name);
-        img_county = (ImageView)itemView.findViewById(R.id.county_image);
+        txt_county_name = itemView.findViewById(R.id.county_name);
+        img_county = itemView.findViewById(R.id.county_image);
 
         itemView.setOnClickListener(this);
     }

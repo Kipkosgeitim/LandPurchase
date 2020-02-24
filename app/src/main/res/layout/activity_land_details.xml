@@ -142,7 +142,7 @@
                         app:backGroundColor="@color/colorAccent"
                         app:initialNumber="1"
                         app:finalNumber="20"
-                        />
+                        tools:ignore="SmallSp" />
 
 
                 </LinearLayout>

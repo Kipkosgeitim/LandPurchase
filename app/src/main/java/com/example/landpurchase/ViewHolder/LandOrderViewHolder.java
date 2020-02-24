@@ -19,11 +19,11 @@ public class LandOrderViewHolder extends RecyclerView.ViewHolder implements View
     public LandOrderViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        txtLandId = (TextView)itemView.findViewById(R.id.land_id);
-        txtLandPhone=(TextView)itemView.findViewById(R.id.land_phone);
-        txtLandStatus=(TextView)itemView.findViewById(R.id.land_status);
-        txtLandAddress=(TextView)itemView.findViewById(R.id.land_address);
-        btn_delete = (ImageView)itemView.findViewById(R.id.btn_delete);
+        txtLandId = itemView.findViewById(R.id.land_id);
+        txtLandPhone= itemView.findViewById(R.id.land_phone);
+        txtLandStatus= itemView.findViewById(R.id.land_status);
+        txtLandAddress= itemView.findViewById(R.id.land_address);
+        btn_delete = itemView.findViewById(R.id.btn_delete);
 
         itemView.setOnClickListener(this);
     }

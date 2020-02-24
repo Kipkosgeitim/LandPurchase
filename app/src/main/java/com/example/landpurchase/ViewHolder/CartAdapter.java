@@ -59,8 +59,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
                 order.setSizeOfLand(String.valueOf(newValue));
                 new Database(cart).updateCart(order);
 
-                /**update txtTotal
-                calculate total price**/
                 int total =0;
                 List<LandOrder> orders = new Database(cart).getCarts(Common.currentUser.getPhone());
                 for (LandOrder item:orders)

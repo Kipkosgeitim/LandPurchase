@@ -42,9 +42,9 @@ public class LandStatus extends AppCompatActivity {
 
         /**Firebase**/
         database = FirebaseDatabase.getInstance();
-        requests = database.getReference("Restaurants").child(Common.countySelected).child("Requests");
+        requests = database.getReference("Counties").child(Common.countySelected).child("Requests");
 
-        recyclerView = (RecyclerView)findViewById(R.id.listLands);
+        recyclerView = findViewById(R.id.listLands);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -119,7 +119,7 @@ public class LandStatus extends AppCompatActivity {
                 .removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(LandStatus.this, new StringBuilder("Order")
+                Toast.makeText(LandStatus.this, new StringBuilder("Order ")
                         .append(key)
                         .append("has been deleted!").toString(), Toast.LENGTH_SHORT).show();
             }

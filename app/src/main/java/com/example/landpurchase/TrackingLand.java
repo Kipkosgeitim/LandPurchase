@@ -1,9 +1,9 @@
 package com.example.landpurchase;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -44,6 +44,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@SuppressWarnings({"ConstantConditions" , "NullableProblems"})
 public class TrackingLand extends FragmentActivity implements OnMapReadyCallback,ValueEventListener{
 
     private GoogleMap mMap;
@@ -94,216 +95,212 @@ public class TrackingLand extends FragmentActivity implements OnMapReadyCallback
     private void trackingLocation() {
 
 
-        requests.child(Common.currentKey)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        currentLand = dataSnapshot.getValue(Requests.class);
+        requests.child(Common.currentKey);
+        requests.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentLand = dataSnapshot.getValue(Requests.class);
 
-                        /**if class has address**/
-                        if (currentLand.getAddress() !=null && !currentLand.getAddress().isEmpty())
-                        {
-                            mService.getLocationFromAddress(new StringBuilder("https://maps.googleapis.com/maps/api/geocode/json?address=")
-                                    .append(currentLand.getAddress()).toString())
-                                    .enqueue(new Callback<String>() {
-                                        @Override
-                                        public void onResponse(Call<String> call, Response<String> response) {
-                                            try{
-                                                JSONObject jsonObject = new JSONObject(response.body());
+                /**if class has address**/
+                if (currentLand.getAddress() != null && !currentLand.getAddress().isEmpty()) {
+                    //noinspection StringBufferReplaceableByString
+                    mService.getLocationFromAddress(new StringBuilder("https://maps.googleapis.com/maps/api/geocode/json?address=")
+                            .append(currentLand.getAddress()).toString())
+                            .enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call , Response<String> response) {
+                                    try {
+                                        //noinspection ConstantConditions
+                                        JSONObject jsonObject = new JSONObject(response.body());
 
-                                                String lat = ((JSONArray)jsonObject.get("results"))
-                                                        .getJSONObject(0)
-                                                        .getJSONObject("geometry")
-                                                        .getJSONObject("location")
-                                                        .get("lat").toString();
+                                        String lat = ((JSONArray) jsonObject.get("results"))
+                                                .getJSONObject(0)
+                                                .getJSONObject("geometry")
+                                                .getJSONObject("location")
+                                                .get("lat").toString();
 
-                                                String lng = ((JSONArray)jsonObject.get("results"))
-                                                        .getJSONObject(0)
-                                                        .getJSONObject("geometry")
-                                                        .getJSONObject("location")
-                                                        .get("lng").toString();
+                                        String lng = ((JSONArray) jsonObject.get("results"))
+                                                .getJSONObject(0)
+                                                .getJSONObject("geometry")
+                                                .getJSONObject("location")
+                                                .get("lng").toString();
 
-                                                LatLng location = new LatLng(Double.parseDouble(lat),
-                                                        Double.parseDouble(lng));
+                                        LatLng location = new LatLng(Double.parseDouble(lat) ,
+                                                Double.parseDouble(lng));
 
-                                                mMap.addMarker(new MarkerOptions().position(location)
-                                                        .title("Land Location destination")
-                                                        .icon(BitmapDescriptorFactory.defaultMarker()));
+                                        mMap.addMarker(new MarkerOptions().position(location)
+                                                .title("Land Location destination")
+                                                .icon(BitmapDescriptorFactory.defaultMarker()));
 
-                                                /**Set Shipper location**/
-                                                landOrder.child(Common.currentKey)
-                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                                                            @Override
-                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                LandInformation landInformation = dataSnapshot.getValue(LandInformation.class);
+                                        /**Set land location**/
+                                        landOrder.child(Common.currentKey)
+                                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        LandInformation landInformation = dataSnapshot.getValue(LandInformation.class);
 
-                                                                LatLng landLocation = new LatLng(landInformation.getLat(),landInformation.getLng());
-                                                                if (landMaker ==null)
-                                                                {
-                                                                    landMaker = mMap.addMarker(
-                                                                            new MarkerOptions()
-                                                                                    .position(landLocation)
-                                                                                    .title("Land Location # "+landInformation.getLandId())
-                                                                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
-                                                                    );
-                                                                }
-                                                                else
-                                                                {
-                                                                    landMaker.setPosition(landLocation);
-                                                                }
-                                                                /**Update Camera**/
-                                                                CameraPosition cameraPosition = new CameraPosition.Builder()
-                                                                        .target(landLocation)
-                                                                        .zoom(16)
-                                                                        .bearing(0)
-                                                                        .tilt(45)
-                                                                        .build();
-                                                                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                                                        @SuppressWarnings("ConstantConditions") LatLng landLocation = new LatLng(landInformation.getLat() , landInformation.getLng());
+                                                        if (landMaker == null) {
+                                                            landMaker = mMap.addMarker(
+                                                                    new MarkerOptions()
+                                                                            .position(landLocation)
+                                                                            .title("Land Location # " + landInformation.getLandId())
+                                                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+                                                            );
+                                                        } else {
+                                                            landMaker.setPosition(landLocation);
+                                                        }
+                                                        /**Update Camera**/
+                                                        CameraPosition cameraPosition = new CameraPosition.Builder()
+                                                                .target(landLocation)
+                                                                .zoom(16)
+                                                                .bearing(0)
+                                                                .tilt(45)
+                                                                .build();
+                                                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-                                                                /**draw routes**/
-                                                                if (polyline !=null)
-                                                                    polyline.remove();
-                                                                mService.getDirections(landLocation.latitude+","+landLocation.longitude,
-                                                                        currentLand.getAddress())
-                                                                        .enqueue(new Callback<String>() {
-                                                                            @Override
-                                                                            public void onResponse(Call<String> call, Response<String> response) {
-                                                                                new ParserTask().execute(response.body()).toString();
-                                                                            }
+                                                        /**draw routes**/
+                                                        if (polyline != null)
+                                                            polyline.remove();
+                                                        mService.getDirections(landLocation.latitude + "," + landLocation.longitude ,
+                                                                currentLand.getAddress())
+                                                                .enqueue(new Callback<String>() {
+                                                                    @Override
+                                                                    public void onResponse(Call<String> call , Response<String> response) {
+                                                                        //noinspection ResultOfMethodCallIgnored
+                                                                        new ParserTask().execute(response.body()).toString();
+                                                                    }
 
-                                                                            @Override
-                                                                            public void onFailure(Call<String> call, Throwable t) {
+                                                                    @Override
+                                                                    public void onFailure(Call<String> call , Throwable t) {
 
-                                                                            }
-                                                                        });
-                                                            }
+                                                                    }
+                                                                });
+                                                    }
 
-                                                            @Override
-                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                                            }
-                                                        });
-
-
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<String> call, Throwable t) {
-
-                                        }
-                                    });
-
-                        }
-                        /**If land has latlng**/
-                        else if (currentLand.getLatLng() !=null && !currentLand.getLatLng().isEmpty())
-                        {
-
-                            mService.getLocationFromAddress(new StringBuilder("https://maps.googleapis.com/maps/api/geocode/json?latlng=")
-                                    .append(currentLand.getLatLng()).toString())
-                                    .enqueue(new Callback<String>() {
-                                        @Override
-                                        public void onResponse(Call<String> call, Response<String> response) {
-                                            try{
-                                                JSONObject jsonObject = new JSONObject(response.body());
-
-                                                String lat = ((JSONArray)jsonObject.get("results"))
-                                                        .getJSONObject(0)
-                                                        .getJSONObject("geometry")
-                                                        .getJSONObject("location")
-                                                        .get("lat").toString();
-
-                                                String lng = ((JSONArray)jsonObject.get("results"))
-                                                        .getJSONObject(0)
-                                                        .getJSONObject("geometry")
-                                                        .getJSONObject("location")
-                                                        .get("lng").toString();
-
-                                                LatLng location = new LatLng(Double.parseDouble(lat),
-                                                        Double.parseDouble(lng));
-
-                                                mMap.addMarker(new MarkerOptions().position(location)
-                                                        .title("Land Location destination")
-                                                        .icon(BitmapDescriptorFactory.defaultMarker()));
-
-                                                /**Set Shipper location**/
-                                                landOrder.child(Common.currentKey)
-                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                                                            @Override
-                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                LandInformation landInformation = dataSnapshot.getValue(LandInformation.class);
-
-                                                                LatLng landLocation = new LatLng(landInformation.getLat(),landInformation.getLng());
-                                                                if (landMaker ==null)
-                                                                {
-                                                                    landMaker = mMap.addMarker(
-                                                                            new MarkerOptions()
-                                                                                    .position(landLocation)
-                                                                                    .title("Land location # "+landInformation.getLandId())
-                                                                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
-                                                                    );
-                                                                }
-                                                                else
-                                                                {
-                                                                    landMaker.setPosition(landLocation);
-                                                                }
-                                                                /**Update Camera**/
-                                                                CameraPosition cameraPosition = new CameraPosition.Builder()
-                                                                        .target(landLocation)
-                                                                        .zoom(16)
-                                                                        .bearing(0)
-                                                                        .tilt(45)
-                                                                        .build();
-                                                                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-                                                                /**draw routes**/
-                                                                if (polyline !=null)
-                                                                    polyline.remove();
-                                                                mService.getDirections(landLocation.latitude+","+landLocation.longitude,
-                                                                        currentLand.getLatLng())
-                                                                        .enqueue(new Callback<String>() {
-                                                                            @Override
-                                                                            public void onResponse(Call<String> call, Response<String> response) {
-                                                                                new
-                                                                                        ParserTask().execute(response.body()).toString();
-                                                                            }
-
-                                                                            @Override
-                                                                            public void onFailure(Call<String> call, Throwable t) {
-
-                                                                            }
-                                                                        });
-                                                            }
-
-                                                            @Override
-                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                            }
-                                                        });
+                                                    }
+                                                });
 
 
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
 
-                                        @Override
-                                        public void onFailure(Call<String> call, Throwable t) {
+                                @Override
+                                public void onFailure(Call<String> call , Throwable t) {
 
-                                        }
-                                    });
+                                }
+                            });
 
-                        }
+                }
+                /**If land has latlng**/
+                else if (currentLand.getLatLng() != null && !currentLand.getLatLng().isEmpty()) {
 
-                    }
+                    mService.getLocationFromAddress(new StringBuilder("https://maps.googleapis.com/maps/api/geocode/json?latlng=")
+                            .append(currentLand.getLatLng()).toString())
+                            .enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call , Response<String> response) {
+                                    try {
+                                        @SuppressWarnings("ConstantConditions") JSONObject jsonObject = new JSONObject(response.body());
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        String lat = ((JSONArray) jsonObject.get("results"))
+                                                .getJSONObject(0)
+                                                .getJSONObject("geometry")
+                                                .getJSONObject("location")
+                                                .get("lat").toString();
 
-                    }
-                });
+                                        String lng = ((JSONArray) jsonObject.get("results"))
+                                                .getJSONObject(0)
+                                                .getJSONObject("geometry")
+                                                .getJSONObject("location")
+                                                .get("lng").toString();
+
+                                        LatLng location = new LatLng(Double.parseDouble(lat) ,
+                                                Double.parseDouble(lng));
+
+                                        mMap.addMarker(new MarkerOptions().position(location)
+                                                .title("Land Location destination")
+                                                .icon(BitmapDescriptorFactory.defaultMarker()));
+
+                                        /**Set Shipper location**/
+                                        landOrder.child(Common.currentKey)
+                                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        LandInformation landInformation = dataSnapshot.getValue(LandInformation.class);
+
+                                                        @SuppressWarnings("ConstantConditions") LatLng landLocation = new LatLng(landInformation.getLat() , landInformation.getLng());
+                                                        if (landMaker == null) {
+                                                            landMaker = mMap.addMarker(
+                                                                    new MarkerOptions()
+                                                                            .position(landLocation)
+                                                                            .title("Land location # " + landInformation.getLandId())
+                                                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
+                                                            );
+                                                        } else {
+                                                            landMaker.setPosition(landLocation);
+                                                        }
+                                                        /**Update Camera**/
+                                                        CameraPosition cameraPosition = new CameraPosition.Builder()
+                                                                .target(landLocation)
+                                                                .zoom(16)
+                                                                .bearing(0)
+                                                                .tilt(45)
+                                                                .build();
+                                                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                                                        /**draw routes**/
+                                                        if (polyline != null)
+                                                            polyline.remove();
+                                                        mService.getDirections(landLocation.latitude + "," + landLocation.longitude ,
+                                                                currentLand.getLatLng())
+                                                                .enqueue(new Callback<String>() {
+                                                                    @SuppressWarnings("ResultOfMethodCallIgnored")
+                                                                    @Override
+                                                                    public void onResponse(Call<String> call , Response<String> response) {
+                                                                        new
+                                                                                ParserTask().execute(response.body()).toString();
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onFailure(Call<String> call , Throwable t) {
+
+                                                                    }
+                                                                });
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                    }
+                                                });
+
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call , Throwable t) {
+
+                                }
+                            });
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -317,6 +314,8 @@ public class TrackingLand extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    @SuppressLint("StaticFieldLeak")
+    @SuppressWarnings("unchecked")
     private class ParserTask extends AsyncTask<String,Integer, List<List<HashMap<String,String>>>> {
         AlertDialog mDialog = new SpotsDialog(TrackingLand.this);
 
@@ -346,7 +345,7 @@ public class TrackingLand extends FragmentActivity implements OnMapReadyCallback
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> lists) {
             mDialog.dismiss();
-            ArrayList points = null;
+            @SuppressWarnings("UnusedAssignment") ArrayList points = null;
             PolylineOptions lineOptions = null;
 
             for (int i = 0 ;i<lists.size();i++){
@@ -358,8 +357,8 @@ public class TrackingLand extends FragmentActivity implements OnMapReadyCallback
                 for (int j=0;j<path.size();j++){
                     HashMap<String,String >point = path.get(j);
 
-                    double lat = Double.parseDouble(point.get("lat"));
-                    double lng = Double.parseDouble(point.get("lng"));
+                    @SuppressWarnings("ConstantConditions") double lat = Double.parseDouble(point.get("lat"));
+                    @SuppressWarnings("ConstantConditions") double lng = Double.parseDouble(point.get("lng"));
 
                     LatLng position = new LatLng(lat,lng);
 

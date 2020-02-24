@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardElevation="10dp"
-    app:cardCornerRadius="8dp"
+    app:cardElevation="20dp"
+    app:cardCornerRadius="16dp"
     >
 
     <LinearLayout
@@ -18,7 +18,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <TextView
                 android:id="@+id/txtUserPhone"
@@ -38,14 +39,18 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+    </LinearLayout>
+
         <TextView
             android:id="@+id/txtComment"
             android:text="@string/comment"
             android:textSize="16sp"
             android:textStyle="italic"
+            android:layout_margin="20dp"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content" />
 
-    </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

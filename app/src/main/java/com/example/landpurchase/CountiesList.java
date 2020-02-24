@@ -77,7 +77,7 @@ public class CountiesList extends AppCompatActivity {
         setContentView(R.layout.activity_counties_list);
 
         /**View**/
-        mSwipeRefreshLayout =(SwipeRefreshLayout)findViewById(R.id.swipe_layout);
+        mSwipeRefreshLayout = findViewById(R.id.swipe_layout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
                 android.R.color.holo_orange_dark,
@@ -108,7 +108,7 @@ public class CountiesList extends AppCompatActivity {
                 }
             }
         });
-        recyclerView =(RecyclerView)findViewById(R.id.recycler_county);
+        recyclerView = findViewById(R.id.recycler_county);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 

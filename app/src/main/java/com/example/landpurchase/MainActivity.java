@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -63,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         users = database.getReference("user");
 
-        btn_continue= (Button)findViewById(R.id.btn_continue);
+        btn_continue= findViewById(R.id.btn_continue);
 
-        txtSlogan = (TextView)findViewById(R.id.slogan);
+        txtSlogan = findViewById(R.id.slogan);
         /**Typeface face = Typeface.createFromAsset(getAssets(),"fonts/NABILA.TTF");
         txtSlogan.setTypeface(face);**/
 

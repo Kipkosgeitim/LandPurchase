@@ -23,12 +23,12 @@ public class LandViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
 
-        land_name = (TextView)itemView.findViewById(R.id.land_name);
-        land_image = (ImageView)itemView.findViewById(R.id.land_image);
-        fav_image = (ImageView)itemView.findViewById(R.id.fav);
-        share_image = (ImageView)itemView.findViewById(R.id.btnShare);
-        land_price = (TextView)itemView.findViewById(R.id.land_price);
-        quick_cart = (ImageView)itemView.findViewById(R.id.btn_quick_cart);
+        land_name = itemView.findViewById(R.id.land_address_name);
+        land_image = itemView.findViewById(R.id.land_image);
+        fav_image = itemView.findViewById(R.id.fav);
+        share_image = itemView.findViewById(R.id.btnShare);
+        land_price = itemView.findViewById(R.id.land_price);
+        quick_cart = itemView.findViewById(R.id.btn_quick_cart);
 
         itemView.setOnClickListener(this);
 
