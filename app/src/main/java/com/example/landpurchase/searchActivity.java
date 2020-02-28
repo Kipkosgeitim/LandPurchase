@@ -263,7 +263,7 @@ public class searchActivity extends AppCompatActivity {
                         favorites.setLandDescription(model.getLandDescription());
                         favorites.setSizeOfLand(model.getSizeOfLand());
                         favorites.setLandImage(model.getLandImage());
-                        favorites.setLandTitleDeed(model.getLandMenuId());
+                        favorites.setLandId(model.getLandMenuId());
                         favorites.setUserPhone(Common.currentUser.getPhone());
                         favorites.setLandPrice(model.getLandPrice());
 

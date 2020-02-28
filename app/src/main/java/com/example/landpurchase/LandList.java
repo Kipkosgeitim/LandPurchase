@@ -319,6 +319,7 @@ public class LandList extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull final LandViewHolder viewHolder, final int position, @NonNull final Land model) {
 
+
                 viewHolder.land_name.setText(model.getName());
                 //viewHolder.food_price.setText(String.format("$ %s", model.getPrice().toString()));
                 Picasso.with(getBaseContext()).load(model.getLandImage())
@@ -380,7 +381,7 @@ public class LandList extends AppCompatActivity {
                         favorites.setLandDescription(model.getLandDescription());
                         favorites.setSizeOfLand(model.getSizeOfLand());
                         favorites.setLandImage(model.getLandImage());
-                        favorites.setLandTitleDeed(model.getLandMenuId());
+                        favorites.setLandId(model.getLandMenuId());
                         favorites.setUserPhone(Common.currentUser.getPhone());
                         favorites.setLandPrice(model.getLandPrice());
 
@@ -388,13 +389,13 @@ public class LandList extends AppCompatActivity {
                         {
                             localDB.addFavorites(favorites);
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
-                            Toast.makeText(LandList.this, ""+model.getName()+"was added to Favourites", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LandList.this, ""+model.getName()+" was added to Favourites", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             localDB.removeFromFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone());
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
-                            Toast.makeText(LandList.this, ""+model.getName()+"was removed from Favourites", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LandList.this, ""+model.getName()+" was removed from Favourites", Toast.LENGTH_SHORT).show();
 
                         }
                     }

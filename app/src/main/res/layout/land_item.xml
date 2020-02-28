@@ -27,7 +27,7 @@
             android:background="#4f0e0d0e">
 
             <TextView
-                android:id="@+id/land_address_name"
+                android:id="@+id/land_name"
                 android:text="@string/nameOfLandLocation"
                 android:textColor="@android:color/white"
                 android:layout_weight="8"

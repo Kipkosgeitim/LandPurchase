@@ -124,12 +124,12 @@ public class Database extends SQLiteAssetHelper {
     public void addFavorites(Favorites land){
         SQLiteDatabase db = getReadableDatabase();
         String query = String.format("INSERT INTO Favorites(" +
-                "Land,LandLocationName,LandPrice,LandTitleDeed,LandImage,SizeOfLand,LandDescription,UserPhone)" +
+                "Land,LandLocationName,LandPrice,LandId,LandImage,SizeOfLand,LandDescription,UserPhone)" +
                 " VALUES('%s','%s','%s','%s','%s','%s','%s','%s');",
                 land.getLand(),
                 land.getLandLocationName(),
                 land.getLandPrice(),
-                land.getLandTitleDeed(),
+                land.getLandId(),
                 land.getLandImage(),
                 land.getSizeOfLand(),
                 land.getLandDescription(),
@@ -162,7 +162,7 @@ public class Database extends SQLiteAssetHelper {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-        String[] sqlSelect = {"UserPhone","Land","LandLocationName","LandPrice","LandTitleDeed","LandImage","SizeOfLand","LandDescription"};
+        String[] sqlSelect = {"UserPhone","Land","LandLocationName","LandPrice","LandId","LandImage","SizeOfLand","LandDescription"};
         String sqlTable ="Favorites";
 
         qb.setTables(sqlTable);
@@ -176,7 +176,7 @@ public class Database extends SQLiteAssetHelper {
                         c.getString(c.getColumnIndex("Land")),
                         c.getString(c.getColumnIndex("LandLocationName")),
                         c.getString(c.getColumnIndex("LandPrice")),
-                        c.getString(c.getColumnIndex("LandTitleDeed")),
+                        c.getString(c.getColumnIndex("LandId")),
                         c.getString(c.getColumnIndex("LandImage")),
                         c.getString(c.getColumnIndex("SizeOfLand")),
                         c.getString(c.getColumnIndex("LandDescription")),

@@ -1,17 +1,17 @@
 package com.example.landpurchase.Models;
 
 public class Favorites {
-    private String Land,LandLocationName,LandPrice,LandTitleDeed,LandImage,SizeOfLand,LandDescription,UserPhone;
+    private String Land,LandLocationName,LandPrice,LandId,LandImage,SizeOfLand,LandDescription,UserPhone;
 
 
     public Favorites() {
     }
 
-    public Favorites(String land, String landLocationName, String landPrice, String landTitleDeed, String landImage, String sizeOfLand, String landDescription, String userPhone) {
+    public Favorites(String land , String landLocationName , String landPrice , String landId , String landImage , String sizeOfLand , String landDescription , String userPhone) {
         Land = land;
         LandLocationName = landLocationName;
         LandPrice = landPrice;
-        LandTitleDeed = landTitleDeed;
+        LandId = landId;
         LandImage = landImage;
         SizeOfLand = sizeOfLand;
         LandDescription = landDescription;
@@ -42,12 +42,12 @@ public class Favorites {
         LandPrice = landPrice;
     }
 
-    public String getLandTitleDeed() {
-        return LandTitleDeed;
+    public String getLandId() {
+        return LandId;
     }
 
-    public void setLandTitleDeed(String landTitleDeed) {
-        LandTitleDeed = landTitleDeed;
+    public void setLandId(String landId) {
+        LandId = landId;
     }
 
     public String getLandImage() {
