@@ -418,15 +418,19 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                             .replace("$", "")
                             .replace(",", "");
 
-                    PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmount),
+                 /**  PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmount),
                             "USD",
                             "Eat It App Order",
-                            PayPalPayment.PAYMENT_INTENT_SALE);
+                            PayPalPayment.PAYMENT_INTENT_SALE);**/
 
-                    Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
+                            Intent intent = new Intent(Cart.this,MpesaActivity.class);
+                            startActivity(intent);
+
+
+                    /**Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
                     intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
                     intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
-                    startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+                    startActivityForResult(intent, PAYPAL_REQUEST_CODE);**/
                 }
                 else if (rdiCash.isChecked()){
                     if (mLastLocation !=null) {
