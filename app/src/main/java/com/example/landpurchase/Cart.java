@@ -423,8 +423,9 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
                             "Eat It App Order",
                             PayPalPayment.PAYMENT_INTENT_SALE);**/
 
-                            Intent intent = new Intent(Cart.this,MpesaActivity.class);
+                           Intent intent = new Intent(Cart.this,MpesaActivity.class);
                             startActivity(intent);
+                            finish();
 
 
                     /**Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);

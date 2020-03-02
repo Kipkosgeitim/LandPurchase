@@ -25,7 +25,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MpesaActivity extends AppCompatActivity implements TokenListener {
 
-    public static final String TAG = MainActivity.class.getSimpleName();
+    public static final String TAG = MpesaActivity.class.getSimpleName();
 
     private EditText phoneET, amountET;
     private SweetAlertDialog sweetAlertDialog;
@@ -37,7 +37,7 @@ public class MpesaActivity extends AppCompatActivity implements TokenListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mpesa);
 
         phoneET = findViewById(R.id.phoneET);
         amountET = findViewById(R.id.amountET);

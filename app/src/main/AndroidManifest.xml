@@ -17,6 +17,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity android:name=".MpesaActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".ShowComment" />
         <activity android:name=".Cart" />
         <activity android:name=".searchActivity" />
@@ -45,13 +46,14 @@
         <activity android:name=".TrackingLand" />
         <activity android:name=".CountiesList" />
         <activity android:name=".LandStatus" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- FirebaseInstanceIdService performs security checks at runtime, no need for explicit permissions despite exported="true" -->
+        </activity>
+        <!-- FirebaseInstanceIdService performs security checks at runtime, no need for explicit permissions despite exported="true" -->
         <service android:name=".Service.MyFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />

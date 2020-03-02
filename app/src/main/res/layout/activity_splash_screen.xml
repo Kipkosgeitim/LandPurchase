@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_green_dark"
+    android:orientation="horizontal"
+    tools:context=".SplashScreen">
+
+    <ImageView
+        android:id="@+id/image_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/logo"
+        />
+
+    <TextView
+        android:id="@+id/land_purchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_splash"
+        android:layout_marginTop="-130sp"
+        android:layout_centerInParent="true"
+        android:text="Land Purchase"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/slo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/land_purchase"
+        android:layout_marginBottom="-34dp"
+        android:text="Everyone deserves the opportunity of home"
+        android:layout_centerInParent="true"
+        android:textSize="17sp"
+        android:textStyle="italic"/>
+
+</RelativeLayout>
