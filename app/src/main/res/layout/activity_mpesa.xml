@@ -1,44 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MpesaActivity"
-    android:padding="10dp">
+    tools:context=".MpesaActivity">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:text="Mpesa Online Checkout"
-        android:textAllCaps="true"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/phoneET"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="Phone Number"
-        android:inputType="phone" />
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/amountET"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="@string/mpesa_online"
+            android:textAllCaps="true"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="Amount"
-        android:inputType="number" />
+        android:layout_height="wrap_content">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/phoneET"
+            android:hint="@string/phoneNum"
+            android:layout_width="match_parent"
+            android:textColor="@android:color/background_dark"
+            android:text=""
+            android:textColorHint="@android:color/background_dark"
+            android:textSize="34sp"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            app:met_baseColor="@android:color/background_dark"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="10"
+            app:met_primaryColor="@android:color/background_dark"
+            app:met_singleLineEllipsis="true"/>
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/amountET"
+            android:hint="@string/amount"
+            android:layout_width="match_parent"
+            android:textColor="@android:color/background_dark"
+            android:text=""
+            android:textColorHint="@android:color/white"
+            android:textSize="34sp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:met_baseColor="@android:color/background_dark"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="10"
+            app:met_primaryColor="@android:color/background_dark"
+            app:met_singleLineEllipsis="true"
+
+            />
+
+    </LinearLayout>
 
     <Button
+        android:id="@+id/btSignIn"
+        android:text="Pay"
+        android:textColor="@android:color/white"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true"
         android:onClick="startMpesa"
-        android:text="Pay" />
+        android:layout_margin="8dp"
+        android:background="@color/btnSignIn"
+        />
 
-</LinearLayout>
+
+
+</RelativeLayout>

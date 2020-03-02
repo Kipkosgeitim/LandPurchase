@@ -30,6 +30,9 @@
     <string name="placeLandOrder">Place Land Order</string>
     <string name="news">Subscribe News</string>
     <string name="userPhone">User Phone</string>
+    <string name="phoneNum">Phone Number</string>
+    <string name="amount">Amount</string>
+    <string name="mpesa_online">Mpesa Online Checkout</string>
 
     <string name="action_settings">Settings</string>
     <string name="countyName">name of County</string>

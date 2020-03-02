@@ -784,5 +784,31 @@ public class Cart extends AppCompatActivity implements RecyclerItemTouchHelperLi
         mLastLocation =location;
         displayLocation();
     }
+    /**
+
+
+     <EditText
+     android:id="@+id/phoneET"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="10dp"
+     android:hint="Phone Number"
+     android:inputType="phone" />
+
+     <EditText
+     android:id="@+id/amountET"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="10dp"
+     android:hint="Amount"
+     android:inputType="number" />
+
+     <Button
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="10dp"
+
+     android:text="Pay" />
+     **/
 }
 
