@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.landpurchase">
+    package="com.example.landpurchases">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -16,37 +16,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".MpesaActivity"></activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ShowComment" />
-        <activity android:name=".Cart" />
-        <activity android:name=".searchActivity" />
+        <activity android:name="com.example.landpurchases.MpesaActivity"></activity>
+        <activity android:name="com.example.landpurchases.MainActivity" />
+        <activity android:name="com.example.landpurchases.ShowComment" />
+        <activity android:name="com.example.landpurchases.Cart" />
+        <activity android:name="com.example.landpurchases.searchActivity" />
         <activity
-            android:name=".Home"
+            android:name="com.example.landpurchases.Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FavoritesActivity" />
-        <activity android:name=".LandList" />
+        <activity android:name="com.example.landpurchases.FavoritesActivity" />
+        <activity android:name="com.example.landpurchases.LandList" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAANaqT72b-ohiqgcxvk5YKThgKSxBwshY" />
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-        <meta-data
-            android:name="com.facebook.accountkit.ApplicationName"
-            android:value="@string/app_name" />
-        <meta-data
-            android:name="com.facebook.accountkit.ClientToken"
-            android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />
-
-        <activity android:name="com.facebook.accountkit.ui.AccountKitActivity" />
-        <activity android:name=".LandDetails" />
-        <activity android:name=".TrackingLand" />
-        <activity android:name=".CountiesList" />
-        <activity android:name=".LandStatus" />
-        <activity android:name=".SplashScreen">
+        <activity android:name="com.example.landpurchases.TrackingLand" />
+        <activity android:name="com.example.landpurchases.CountiesList" />
+        <activity android:name="com.example.landpurchases.LandStatus" />
+        <activity android:name="com.example.landpurchases.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,21 +42,17 @@
             </intent-filter>
         </activity>
         <!-- FirebaseInstanceIdService performs security checks at runtime, no need for explicit permissions despite exported="true" -->
-        <service android:name=".Service.MyFirebaseInstanceIdService">
+        <service android:name="com.example.landpurchases.Service.MyFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".Service.MyFirebaseMessaging">
+        <service android:name="com.example.landpurchases.Service.MyFirebaseMessaging">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <provider
-            android:name="com.facebook.FacebookContentProvider"
-            android:authorities="com.facebook.app.FacebookContentProvider2542816435737031"
-            android:exported="true" />
     </application>
 
 </manifest>
